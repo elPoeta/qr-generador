@@ -13,7 +13,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.EnumMap;
 import javax.imageio.ImageIO;
-import sun.misc.BASE64Encoder;
+//import org.apache.commons.codec.binary.Base64;
+//import sun.misc.BASE64Encoder;
+import java.util.Base64;
 
 /**
  *
@@ -50,10 +52,10 @@ public class QrGenerador {
         try {
             ImageIO.write(imagen, tipo, bos);
             byte[] imageBytes = bos.toByteArray();
- 
-            BASE64Encoder encoder = new BASE64Encoder();
-            imagenString = encoder.encode(imageBytes);
+            
+            imagenString = Base64.getEncoder().encodeToString(imageBytes);
             imagenBase64 += imagenString;      
+          
             bos.close();
         } catch (IOException e) {
             e.printStackTrace();
