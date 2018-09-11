@@ -1,9 +1,10 @@
 
 package qr.web.server;
 
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +37,9 @@ public class QrServer extends HttpServlet {
           System.out.println("code "+code);
           BufferedImage imagen = QrGenerador.generarQR(code.getCode(), 150);
           String qrImgBase64 = QrGenerador.qrBase64(imagen,"PNG");
+       
+            System.out.println("decoder>> "+QrGenerador.qrDecode(qrImgBase64));
+      
           response.getWriter().print(GsonUtil.CONVERTIR.toJson(qrImgBase64));
     }
 
